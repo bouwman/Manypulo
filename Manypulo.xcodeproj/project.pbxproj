@@ -21,6 +21,7 @@
 		4754AADD239B94630009227D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AAD8239B94630009227D /* Constants.swift */; };
 		4754AADE239B94630009227D /* ControlDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AAD9239B94630009227D /* ControlDatabase.swift */; };
 		4754AADF239B94630009227D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AADA239B94630009227D /* Protocols.swift */; };
+		47DAF0BA239BBA89003B2C66 /* ControlList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DAF0B9239BBA89003B2C66 /* ControlList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		4754AAD8239B94630009227D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4754AAD9239B94630009227D /* ControlDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlDatabase.swift; sourceTree = "<group>"; };
 		4754AADA239B94630009227D /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		47DAF0AB239BA43B003B2C66 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		47DAF0B9239BBA89003B2C66 /* ControlList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,7 @@
 		4754AA97239B924F0009227D = {
 			isa = PBXGroup;
 			children = (
+				47DAF0AB239BA43B003B2C66 /* README.md */,
 				4754AAA2239B924F0009227D /* Manypulo */,
 				4754AABC239B92540009227D /* ManypuloTests */,
 				4754AAC7239B92540009227D /* ManypuloUITests */,
@@ -114,6 +118,7 @@
 				4754AAA3239B924F0009227D /* AppDelegate.swift */,
 				4754AAA5239B924F0009227D /* SceneDelegate.swift */,
 				4754AAAA239B924F0009227D /* ContentView.swift */,
+				47DAF0B9239BBA89003B2C66 /* ControlList.swift */,
 				4754AAD6239B94630009227D /* BluetoothService.swift */,
 				4754AAD8239B94630009227D /* Constants.swift */,
 				4754AAD7239B94630009227D /* Helper.swift */,
@@ -290,6 +295,7 @@
 				4754AAAB239B924F0009227D /* ContentView.swift in Sources */,
 				4754AADF239B94630009227D /* Protocols.swift in Sources */,
 				4754AADE239B94630009227D /* ControlDatabase.swift in Sources */,
+				47DAF0BA239BBA89003B2C66 /* ControlList.swift in Sources */,
 				4754AAA6239B924F0009227D /* SceneDelegate.swift in Sources */,
 				4754AADD239B94630009227D /* Constants.swift in Sources */,
 				4754AADB239B94630009227D /* BluetoothService.swift in Sources */,

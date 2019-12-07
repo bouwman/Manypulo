@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Control {
+struct ControlS {
     var id: String
     var controlType: ControlType
 }
@@ -19,18 +19,18 @@ enum ControlType {
 
 class ControlDatabase {
     
-    var controls = [Control]()
+    var controls = [ControlS]()
     
-    func findControlFor(id: String) -> Control? {
+    func findControlFor(id: String) -> ControlS? {
         return controls.first(where: { $0.id == id })
     }
     
-    static func sampleControls() -> [Control] {
-        return [Control(id: "445c6a2d4d81", controlType: .onOff),
-                Control(id: "4e45c6a2d4d8", controlType: .continuous),
-                Control(id: "441436a2d4d8", controlType: .continuous),
-                Control(id: "43b436a2d4d8", controlType: .continuous),
-                Control(id: "4f65c6a2d4d8", controlType: .continuous),
-                Control(id: "4ea5c6a2d4d8", controlType: .continuous)]
+    static func sampleControls() -> [ControlS] {
+        return [ControlS(id: "445c6a2d4d81", controlType: .onOff),
+                ControlS(id: "4e45c6a2d4d8", controlType: .continuous),
+                ControlS(id: "441436a2d4d8", controlType: .continuous),
+                ControlS(id: "43b436a2d4d8", controlType: .continuous),
+                ControlS(id: "4f65c6a2d4d8", controlType: .continuous),
+                ControlS(id: "4ea5c6a2d4d8", controlType: .continuous)]
     }
 }

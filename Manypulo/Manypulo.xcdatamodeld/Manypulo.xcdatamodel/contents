@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="true" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Control" representedClassName="Control" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="value" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="output" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Output" inverseName="control" inverseEntity="Output"/>
+    </entity>
+    <entity name="Output" representedClassName="Output" syncable="YES" codeGenerationType="class">
+        <attribute name="type" attributeType="String" defaultValueString="Text"/>
+        <relationship name="control" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Control" inverseName="output" inverseEntity="Control"/>
+        <relationship name="prototype" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Prototype" inverseName="outputs" inverseEntity="Prototype"/>
+    </entity>
+    <entity name="Prototype" representedClassName="Prototype" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String" defaultValueString="Prototype"/>
+        <relationship name="outputs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Output" inverseName="prototype" inverseEntity="Output"/>
+    </entity>
+    <elements>
+        <element name="Control" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="Prototype" positionX="-54" positionY="9" width="128" height="73"/>
+        <element name="Output" positionX="-36" positionY="27" width="128" height="88"/>
+    </elements>
 </model>
