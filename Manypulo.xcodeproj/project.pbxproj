@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47058B3D239DA3380052E811 /* PrototypeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47058B3C239DA3380052E811 /* PrototypeDetail.swift */; };
+		47058B41239EDAF70052E811 /* OutputDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47058B40239EDAF70052E811 /* OutputDetail.swift */; };
 		4754AAA4239B924F0009227D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AAA3239B924F0009227D /* AppDelegate.swift */; };
 		4754AAA6239B924F0009227D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AAA5239B924F0009227D /* SceneDelegate.swift */; };
 		4754AAA9239B924F0009227D /* Manypulo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4754AAA7239B924F0009227D /* Manypulo.xcdatamodeld */; };
@@ -21,7 +23,15 @@
 		4754AADD239B94630009227D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AAD8239B94630009227D /* Constants.swift */; };
 		4754AADE239B94630009227D /* ControlDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AAD9239B94630009227D /* ControlDatabase.swift */; };
 		4754AADF239B94630009227D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AADA239B94630009227D /* Protocols.swift */; };
+		4781320123A057A400E9BDD4 /* RadioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4781320023A057A400E9BDD4 /* RadioView.swift */; };
+		4781320423A060A000E9BDD4 /* PrototypePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4781320323A060A000E9BDD4 /* PrototypePlayer.swift */; };
+		4781320623A187FE00E9BDD4 /* Manypulo.ino in Resources */ = {isa = PBXBuildFile; fileRef = 4781320523A187FE00E9BDD4 /* Manypulo.ino */; };
+		478D00A3239F107E00B8ED3C /* ControlListSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478D00A2239F107E00B8ED3C /* ControlListSelection.swift */; };
 		47DAF0BA239BBA89003B2C66 /* ControlList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DAF0B9239BBA89003B2C66 /* ControlList.swift */; };
+		47DAF0BC239BC93D003B2C66 /* ControlDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DAF0BB239BC93D003B2C66 /* ControlDetail.swift */; };
+		47DAF0FF239C112A003B2C66 /* ControlRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DAF0FE239C112A003B2C66 /* ControlRow.swift */; };
+		47DAF101239C32BF003B2C66 /* OutputRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DAF100239C32BF003B2C66 /* OutputRow.swift */; };
+		47E81793239D9F1F00E80B4E /* PrototypeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E81792239D9F1F00E80B4E /* PrototypeList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		47058B3C239DA3380052E811 /* PrototypeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypeDetail.swift; sourceTree = "<group>"; };
+		47058B3F239ED9C30052E811 /* Manypulo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Manypulo.entitlements; sourceTree = "<group>"; };
+		47058B40239EDAF70052E811 /* OutputDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDetail.swift; sourceTree = "<group>"; };
 		4754AAA0239B924F0009227D /* Manypulo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Manypulo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4754AAA3239B924F0009227D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4754AAA5239B924F0009227D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,8 +75,16 @@
 		4754AAD8239B94630009227D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4754AAD9239B94630009227D /* ControlDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlDatabase.swift; sourceTree = "<group>"; };
 		4754AADA239B94630009227D /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		4781320023A057A400E9BDD4 /* RadioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioView.swift; sourceTree = "<group>"; };
+		4781320323A060A000E9BDD4 /* PrototypePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypePlayer.swift; sourceTree = "<group>"; };
+		4781320523A187FE00E9BDD4 /* Manypulo.ino */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Manypulo.ino; sourceTree = "<group>"; };
+		478D00A2239F107E00B8ED3C /* ControlListSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlListSelection.swift; sourceTree = "<group>"; };
 		47DAF0AB239BA43B003B2C66 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		47DAF0B9239BBA89003B2C66 /* ControlList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlList.swift; sourceTree = "<group>"; };
+		47DAF0BB239BC93D003B2C66 /* ControlDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlDetail.swift; sourceTree = "<group>"; };
+		47DAF0FE239C112A003B2C66 /* ControlRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlRow.swift; sourceTree = "<group>"; };
+		47DAF100239C32BF003B2C66 /* OutputRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputRow.swift; sourceTree = "<group>"; };
+		47E81792239D9F1F00E80B4E /* PrototypeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypeList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,9 +112,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		47058B3E239DA5440052E811 /* Prototype */ = {
+			isa = PBXGroup;
+			children = (
+				47E81792239D9F1F00E80B4E /* PrototypeList.swift */,
+				47058B3C239DA3380052E811 /* PrototypeDetail.swift */,
+				47DAF100239C32BF003B2C66 /* OutputRow.swift */,
+				47058B40239EDAF70052E811 /* OutputDetail.swift */,
+				478D00A2239F107E00B8ED3C /* ControlListSelection.swift */,
+			);
+			path = Prototype;
+			sourceTree = "<group>";
+		};
 		4754AA97239B924F0009227D = {
 			isa = PBXGroup;
 			children = (
+				4781320523A187FE00E9BDD4 /* Manypulo.ino */,
 				47DAF0AB239BA43B003B2C66 /* README.md */,
 				4754AAA2239B924F0009227D /* Manypulo */,
 				4754AABC239B92540009227D /* ManypuloTests */,
@@ -115,15 +149,10 @@
 		4754AAA2239B924F0009227D /* Manypulo */ = {
 			isa = PBXGroup;
 			children = (
-				4754AAA3239B924F0009227D /* AppDelegate.swift */,
-				4754AAA5239B924F0009227D /* SceneDelegate.swift */,
-				4754AAAA239B924F0009227D /* ContentView.swift */,
-				47DAF0B9239BBA89003B2C66 /* ControlList.swift */,
-				4754AAD6239B94630009227D /* BluetoothService.swift */,
-				4754AAD8239B94630009227D /* Constants.swift */,
-				4754AAD7239B94630009227D /* Helper.swift */,
-				4754AAD9239B94630009227D /* ControlDatabase.swift */,
-				4754AADA239B94630009227D /* Protocols.swift */,
+				47058B3F239ED9C30052E811 /* Manypulo.entitlements */,
+				4780D8F7239C6B00001C2EAA /* Delegate */,
+				4780D8F8239C6B0D001C2EAA /* Views */,
+				4780D8F6239C6AE6001C2EAA /* Model */,
 				4754AAAC239B92530009227D /* Assets.xcassets */,
 				4754AAB1239B92530009227D /* LaunchScreen.storyboard */,
 				4754AAB4239B92530009227D /* Info.plist */,
@@ -157,6 +186,57 @@
 				4754AACA239B92540009227D /* Info.plist */,
 			);
 			path = ManypuloUITests;
+			sourceTree = "<group>";
+		};
+		4780D8F6239C6AE6001C2EAA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4754AAD6239B94630009227D /* BluetoothService.swift */,
+				4754AAD9239B94630009227D /* ControlDatabase.swift */,
+				4754AAD8239B94630009227D /* Constants.swift */,
+				4754AAD7239B94630009227D /* Helper.swift */,
+				4754AADA239B94630009227D /* Protocols.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4780D8F7239C6B00001C2EAA /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				4754AAA3239B924F0009227D /* AppDelegate.swift */,
+				4754AAA5239B924F0009227D /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		4780D8F8239C6B0D001C2EAA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4781320223A057AA00E9BDD4 /* Play */,
+				4754AAAA239B924F0009227D /* ContentView.swift */,
+				47E81791239D9F0200E80B4E /* Controls */,
+				47058B3E239DA5440052E811 /* Prototype */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4781320223A057AA00E9BDD4 /* Play */ = {
+			isa = PBXGroup;
+			children = (
+				4781320323A060A000E9BDD4 /* PrototypePlayer.swift */,
+				4781320023A057A400E9BDD4 /* RadioView.swift */,
+			);
+			path = Play;
+			sourceTree = "<group>";
+		};
+		47E81791239D9F0200E80B4E /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				47DAF0B9239BBA89003B2C66 /* ControlList.swift */,
+				47DAF0FE239C112A003B2C66 /* ControlRow.swift */,
+				47DAF0BB239BC93D003B2C66 /* ControlDetail.swift */,
+			);
+			path = Controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4754AAB3239B92530009227D /* LaunchScreen.storyboard in Resources */,
+				4781320623A187FE00E9BDD4 /* Manypulo.ino in Resources */,
 				4754AAB0239B92530009227D /* Preview Assets.xcassets in Resources */,
 				4754AAAD239B92530009227D /* Assets.xcassets in Resources */,
 			);
@@ -290,16 +371,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				478D00A3239F107E00B8ED3C /* ControlListSelection.swift in Sources */,
+				47DAF0FF239C112A003B2C66 /* ControlRow.swift in Sources */,
+				47058B41239EDAF70052E811 /* OutputDetail.swift in Sources */,
 				4754AAA4239B924F0009227D /* AppDelegate.swift in Sources */,
 				4754AAA9239B924F0009227D /* Manypulo.xcdatamodeld in Sources */,
 				4754AAAB239B924F0009227D /* ContentView.swift in Sources */,
+				4781320123A057A400E9BDD4 /* RadioView.swift in Sources */,
+				47DAF0BC239BC93D003B2C66 /* ControlDetail.swift in Sources */,
 				4754AADF239B94630009227D /* Protocols.swift in Sources */,
+				47058B3D239DA3380052E811 /* PrototypeDetail.swift in Sources */,
 				4754AADE239B94630009227D /* ControlDatabase.swift in Sources */,
+				4781320423A060A000E9BDD4 /* PrototypePlayer.swift in Sources */,
 				47DAF0BA239BBA89003B2C66 /* ControlList.swift in Sources */,
+				47E81793239D9F1F00E80B4E /* PrototypeList.swift in Sources */,
 				4754AAA6239B924F0009227D /* SceneDelegate.swift in Sources */,
 				4754AADD239B94630009227D /* Constants.swift in Sources */,
 				4754AADB239B94630009227D /* BluetoothService.swift in Sources */,
 				4754AADC239B94630009227D /* Helper.swift in Sources */,
+				47DAF101239C32BF003B2C66 /* OutputRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,7 +554,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Manypulo/Manypulo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Manypulo/Preview Content\"";
 				DEVELOPMENT_TEAM = A66LE5ZVQX;
 				ENABLE_PREVIEWS = YES;
@@ -475,6 +568,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = tassilo.bouwman.Manypulo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -484,7 +578,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Manypulo/Manypulo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Manypulo/Preview Content\"";
 				DEVELOPMENT_TEAM = A66LE5ZVQX;
 				ENABLE_PREVIEWS = YES;
@@ -495,6 +592,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = tassilo.bouwman.Manypulo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -3,12 +3,11 @@
     <entity name="Control" representedClassName="Control" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="String" defaultValueString=""/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="type" optional="YES" attributeType="String"/>
-        <attribute name="value" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="output" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Output" inverseName="control" inverseEntity="Output"/>
     </entity>
     <entity name="Output" representedClassName="Output" syncable="YES" codeGenerationType="class">
-        <attribute name="type" attributeType="String" defaultValueString="Text"/>
+        <attribute name="action" attributeType="String" defaultValueString="playPause"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="control" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Control" inverseName="output" inverseEntity="Control"/>
         <relationship name="prototype" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Prototype" inverseName="outputs" inverseEntity="Prototype"/>
     </entity>
@@ -17,8 +16,8 @@
         <relationship name="outputs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Output" inverseName="prototype" inverseEntity="Output"/>
     </entity>
     <elements>
-        <element name="Control" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="Control" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="Output" positionX="-36" positionY="27" width="128" height="103"/>
         <element name="Prototype" positionX="-54" positionY="9" width="128" height="73"/>
-        <element name="Output" positionX="-36" positionY="27" width="128" height="88"/>
     </elements>
 </model>
