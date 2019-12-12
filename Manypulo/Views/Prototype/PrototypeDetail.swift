@@ -20,15 +20,15 @@ struct PrototypeDetail: View {
     var prototype: Prototype
     var outputsRequest : FetchRequest<Output>
     var outputs : FetchedResults<Output> { outputsRequest.wrappedValue }
-
+    
     init(prototype: Prototype) {
         self.prototype = prototype
         self.outputsRequest = FetchRequest(entity: Output.entity(),
-                                         sortDescriptors: [NSSortDescriptor(keyPath: \Output.action, ascending: true)],
-                                         predicate: NSPredicate(format: "prototype = %@", prototype))
+                                           sortDescriptors: [NSSortDescriptor(keyPath: \Output.action, ascending: true)],
+                                           predicate: NSPredicate(format: "prototype = %@", prototype))
         self.name = prototype.name ?? "Example"
     }
-        
+    
     var body: some View {
         List {
             Section(header: Text("Name".uppercased())) {
@@ -70,15 +70,15 @@ struct PrototypeDetail: View {
 
 extension PrototypeDetail {
     
-//    func removeOutputs(at offsets: IndexSet) {
-//        for index in offsets {
-//            if let outputs = prototype.outputs {
-//                let control = outputs[index]
-//                context.delete(control)
-//            }
-//        }
-//        save()
-//    }
+    //    func removeOutputs(at offsets: IndexSet) {
+    //        for index in offsets {
+    //            if let outputs = prototype.outputs {
+    //                let control = outputs[index]
+    //                context.delete(control)
+    //            }
+    //        }
+    //        save()
+    //    }
     
     func save()
     {

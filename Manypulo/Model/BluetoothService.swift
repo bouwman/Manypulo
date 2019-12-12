@@ -12,12 +12,7 @@ import CoreBluetooth
 
 class BluetoothService: NSObject, ObservableObject {
     
-    @Published var angle: Float = 0 {
-        didSet {
-            print("VAR")
-            print(self.angle)
-        }
-    }
+    @Published var angle: Float = 0
     @Published var toggled: Bool = false
     @Published var currentObject: String? = nil
     @Published var scannedObjects: [String] = []

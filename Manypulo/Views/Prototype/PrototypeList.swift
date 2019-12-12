@@ -37,6 +37,12 @@ struct PrototypeList: View {
                         self.addPrototype(name: "Example")
                     }
                 )
+            .navigationBarItems(
+                leading: Image(systemName: self.bluetooth.connected ? "wifi" : "wifi.slash"),
+                trailing: Button("Add") {
+                    self.addPrototype(name: "Example")
+                }
+            )
         }
     .listStyle(GroupedListStyle())
     }

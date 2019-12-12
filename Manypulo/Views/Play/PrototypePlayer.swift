@@ -15,6 +15,7 @@ struct PrototypePlayer: View {
     
     @State private var name: String = ""
     @State private var showOutput = false
+    @State private var toggled = false
     
     var prototype: Prototype
     var outputsRequest : FetchRequest<Output>
@@ -29,12 +30,22 @@ struct PrototypePlayer: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             ForEach(outputs, id: \.self) { output in
-                Text(String(self.bluetooth.angle))
-                .font(.largeTitle)
-                .padding(16)
+                VStack(alignment: .center) {
+                    if ActionType(rawValue: output.action!)!.requiredControlType == ControlType.dial {
+                        Text(String(self.bluetooth.angle))
+                        .font(.largeTitle)
+                    } else {
+                        Toggle(isOn: self.$toggled) {
+                            Text("")
+                        }
+                    }
+                }
             }
+        }
+        .onAppear() {
+            self.toggled = self.bluetooth.toggled
         }
     }
 }

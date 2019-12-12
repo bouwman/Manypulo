@@ -109,6 +109,15 @@ struct OutputDetail: View {
                     }
                 }
             )
+                .navigationBarItems(
+                    leading: Button("Cancel") {
+                        self.showModal = false
+                    },
+                    trailing: Button("Save") {
+                        self.saveOutput()
+                        self.showModal = false
+                    }
+                )
                 .navigationBarTitle("Define Output", displayMode: .inline)
                 .listStyle(GroupedListStyle())
         }
