@@ -20,6 +20,7 @@ struct OutputRow: View {
             if action == nil {
                 HStack() {
                     Image(systemName: imageName)
+                        .padding()
                     Text(name)
                     if isSelected {
                         Spacer()

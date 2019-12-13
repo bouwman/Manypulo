@@ -15,7 +15,23 @@ struct PrototypePlayer: View {
     
     @State private var name: String = ""
     @State private var showOutput = false
-    @State private var toggled = false
+    @State private var currentOutputId: String? {
+        didSet {
+            if let _ = currentOutputId {
+                if let output = outputs.first(where: { $0.control?.id == currentOutputId }) {
+                    self.currentOutput = output
+                    self.currentOutputType = ActionType(rawValue: output.action!)!
+                } // tag not found, ignore
+            } else if let _ = oldValue, let output = currentOutput {
+                if self.currentOutputType?.requiredControlType == .some(.button) {
+                    output.value = 1.0
+                    self.currentOutputType = ActionType(rawValue: output.action!)!
+                }
+            }
+        }
+    }
+    @State private var currentOutput: Output?
+    @State private var currentOutputType: ActionType?
     
     var prototype: Prototype
     var outputsRequest : FetchRequest<Output>
@@ -30,22 +46,29 @@ struct PrototypePlayer: View {
     }
     
     var body: some View {
-        VStack(alignment: .center) {
-            ForEach(outputs, id: \.self) { output in
-                VStack(alignment: .center) {
-                    if ActionType(rawValue: output.action!)!.requiredControlType == ControlType.dial {
-                        Text(String(self.bluetooth.angle))
-                        .font(.largeTitle)
-                    } else {
-                        Toggle(isOn: self.$toggled) {
-                            Text("")
-                        }
+        VStack() {
+//            ForEach(self.outputs, id: \.self) { output in
+//                VStack {
+//                    if ActionType(rawValue: output.action!)!.requiredControlType == .button {
+//                        EmptyView()
+//                    }
+//                }
+//            }
+            if currentOutput != nil {
+                if currentOutputType?.requiredControlType == .some(.dial) {
+                    Text(String(self.bluetooth.angle))
+                    .font(.largeTitle)
+                } else {
+                    Toggle(isOn: self.$bluetooth.toggled) {
+                        Text("")
                     }
                 }
+            } else {
+                
             }
         }
         .onAppear() {
-            self.toggled = self.bluetooth.toggled
+            self.currentOutputId = self.bluetooth.currentObject
         }
     }
 }

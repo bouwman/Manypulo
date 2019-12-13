@@ -51,6 +51,7 @@ struct PrototypeDetail: View {
                 }
                 Button(action: { self.showOutput = true }) {
                     Text("Add Output")
+                    .padding()
                 }
             }
         }

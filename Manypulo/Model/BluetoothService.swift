@@ -124,6 +124,7 @@ extension BluetoothService: CBPeripheralDelegate {
                 errorMessage = "no encoding"
                 return
             }
+            self.toggled = !self.toggled
             self.currentObject = nil
             
         default:
