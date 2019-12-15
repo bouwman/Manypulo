@@ -26,11 +26,10 @@ struct PrototypeDetail: View {
         self.outputsRequest = FetchRequest(entity: Output.entity(),
                                            sortDescriptors: [NSSortDescriptor(keyPath: \Output.action, ascending: true)],
                                            predicate: NSPredicate(format: "prototype = %@", prototype))
-        self.name = prototype.name ?? "Example"
     }
     
     var body: some View {
-        List {
+        Form {
             Section(header: Text("Name".uppercased())) {
                 TextField("Name", text: $name, onEditingChanged: { (changed) in
                     self.prototype.name = self.name
@@ -43,15 +42,14 @@ struct PrototypeDetail: View {
             Section(header: Text("Outputs".uppercased())) {
                 ForEach(outputs, id: \.self) { output in
                     NavigationLink(destination: OutputDetail(output: output, prototype: self.prototype, showModal: self.$showOutput)) {
-                        OutputRow(name: output.action!,
-                                  imageName: ActionType(rawValue: output.action!)!.imageName,
+                        ImageTextRow(text: output.actionType.name,
+                                  imageName: output.actionType.imageName,
                                   isSelected: false,
                                   action: nil)
                     }
                 }
-                Button(action: { self.showOutput = true }) {
+                Button(action: { self.showOutput = true } ) {
                     Text("Add Output")
-                    .padding()
                 }
             }
         }
@@ -62,6 +60,9 @@ struct PrototypeDetail: View {
         )
             .sheet(isPresented: self.$showOutput) {
                 OutputDetail(prototype: self.prototype, showModal: self.$showOutput).environment(\.managedObjectContext, self.context).environmentObject(self.bluetooth)
+        }
+        .onAppear() {
+            self.name = self.prototype.name ?? ""
         }
         .listStyle(GroupedListStyle())
     }
@@ -80,6 +81,10 @@ extension PrototypeDetail {
     //        }
     //        save()
     //    }
+    
+    func addOutput() {
+        
+    }
     
     func save()
     {

@@ -1,5 +1,5 @@
 //
-//  ControlRow.swift
+//  OutputRow.swift
 //  Manypulo
 //
 //  Created by Tassilo Bouwman on 07/12/2019.
@@ -8,17 +8,20 @@
 
 import SwiftUI
 
-struct ControlRow: View {
+struct ImageTextRow: View {
     
-    var id: String
+    var text: String
+    var imageName: String
     var isSelected: Bool
     var action: (() -> Void)?
     
     var body: some View {
-        VStack {
+        Group {
             if action == nil {
-                HStack() {
-                    Text(id)
+                HStack(alignment: .center, spacing: 16) {
+                    Image(systemName: imageName)
+                        .frame(width: 24, height: 24)
+                    Text(text)
                     if isSelected {
                         Spacer()
                         Image(systemName: "checkmark")
@@ -26,8 +29,10 @@ struct ControlRow: View {
                 }
             } else {
                 Button(action: action!) {
-                    HStack() {
-                        Text(id)
+                    HStack(alignment: .center, spacing: 16) {
+                        Image(systemName: imageName)
+                            .frame(width: 24, height: 24)
+                        Text(text)
                         if isSelected {
                             Spacer()
                             Image(systemName: "checkmark")
@@ -40,9 +45,9 @@ struct ControlRow: View {
     }
 }
 
-struct ControlRow_Previews: PreviewProvider {
+struct OutputRow_Previews: PreviewProvider {
     static var previews: some View {
-        return ControlRow(id: "Id", isSelected: true)
+        return ImageTextRow(text: "Dial", imageName: "dial", isSelected: true) {
+        }
     }
 }
-

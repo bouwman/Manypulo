@@ -12,7 +12,7 @@ import CoreData
 struct PrototypeList: View {
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var bluetooth: BluetoothService
-
+    
     @FetchRequest(
         entity: Prototype.entity(),
         sortDescriptors: [
@@ -23,28 +23,41 @@ struct PrototypeList: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("Prototype".uppercased())) {
-                        ForEach(prototypes, id: \.self) { prototype in
-                            NavigationLink(destination: PrototypeDetail(prototype: prototype).environment(\.managedObjectContext, self.context)) {
+                ForEach(prototypes, id: \.self) { prototype in
+                    NavigationLink(destination: PrototypeDetail(prototype: prototype).environment(\.managedObjectContext, self.context)) {
+                        VStack(alignment: .leading, spacing: 4) {
                             Text(prototype.name ?? "")
-                            }
-                        }.onDelete(perform: removePrototype)
+                            Text("\(prototype.outputs?.count ?? 0) outputs")
+                                .foregroundColor(Color.secondary)
+                                .font(.caption)
+                        }
                     }
-                }
-                .navigationBarTitle("Prototypes")
-                .navigationBarItems(trailing:
-                    Button("Add") {
-                        self.addPrototype(name: "Example")
-                    }
-                )
-            .navigationBarItems(
-                leading: Image(systemName: self.bluetooth.connected ? "wifi" : "wifi.slash"),
-                trailing: Button("Add") {
-                    self.addPrototype(name: "Example")
+                }.onDelete(perform: removePrototype)
+            }
+            .navigationBarTitle("Prototypes")
+            .navigationBarItems(trailing:
+                Button("Add") {
+                    self.addPrototype(name: "Prototype")
                 }
             )
+                .navigationBarItems(
+                    leading:
+                    Group {
+                        if self.bluetooth.connected {
+                            Image(systemName: "wifi")
+                                .foregroundColor(.green)
+                        } else {
+                            Image(systemName: "wifi.slash")
+                                .foregroundColor(.red)
+                        }
+                    }
+                    ,
+                    trailing: Button("Add") {
+                        self.addPrototype(name: "Example")
+                    }
+            )
         }
-    .listStyle(GroupedListStyle())
+        .listStyle(GroupedListStyle())
     }
 }
 
@@ -77,5 +90,22 @@ extension PrototypeList {
 struct PrototypeList_Previews: PreviewProvider {
     static var previews: some View {
         PrototypeList()
+    }
+}
+
+struct OutputBluetoothSync {
+    var output: Output
+    
+    @Binding var angle: Float {
+        didSet {
+            output.value = Double(angle)
+        }
+    }
+    @Binding var toggled: Bool {
+        didSet {
+            if output.actionType.requiredControlType == .button {
+                output.value = (output.value > 0) ? 0 : 1
+            }
+        }
     }
 }

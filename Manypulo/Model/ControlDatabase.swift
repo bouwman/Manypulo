@@ -9,6 +9,19 @@
 import Foundation
 import SwiftUI
 
+extension Output {
+    var actionType: ActionType {
+        return ActionType(rawValue: self.action)!
+    }
+}
+
+extension Control: Comparable {
+
+    public static func < (lhs: Control, rhs: Control) -> Bool {
+        lhs.id! < rhs.id!
+    }
+}
+
 struct ControlS {
     var id: String
     var controlType: ControlType
@@ -46,12 +59,8 @@ enum ControlType : String {
     }
 }
 
-enum ActionType: String {
+enum ActionType: Int16, CaseIterable {
     case defrost, grill, W600, W800, duration, startStop , playPause, nextSong, previousSong, volume, dimmingLight, onOffLight
-    
-    static var allCases: [ActionType] {
-        return [defrost, grill, W600, W800, duration, startStop, playPause, nextSong, previousSong, volume, dimmingLight, onOffLight]
-    }
     
     var requiredControlType: ControlType {
         switch self {

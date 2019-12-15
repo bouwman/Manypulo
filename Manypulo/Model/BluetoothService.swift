@@ -106,7 +106,11 @@ extension BluetoothService: CBPeripheralDelegate {
                 errorMessage = "no encoding"
                 return
             }
-            let id = String(idString.prefix(12))
+            var id = String(idString.prefix(12))
+            let zerosWithBackslash: Set<Character> = ["\0"]
+            
+            id.removeAll(where: { zerosWithBackslash.contains($0) })
+            
             self.currentObject = id
             
             if scannedObjects.contains(id) == false {

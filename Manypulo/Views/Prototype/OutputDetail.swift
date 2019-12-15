@@ -25,6 +25,7 @@ struct OutputDetail: View {
     ) var controls: FetchedResults<Control>
     
     @Environment(\.managedObjectContext) var context
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var bluetooth: BluetoothService
     
     var output: Output?
@@ -32,114 +33,128 @@ struct OutputDetail: View {
     
     @Binding var showModal: Bool
     
-    @State private var action: String = ""
     @State private var value: Double = 0.0
-    @State private var selectedControl: Control?
+    @State private var selectedControlId: String?
     @State private var selectedActionType: ActionType = .playPause
-    @State private var allActionTypes: [ActionType] = ActionType.allCases
     
     init(output: Output? = nil, prototype: Prototype? = nil, showModal: Binding<Bool>) {
-        self._showModal = showModal
+        self.output = output
         self.prototype = prototype
-        
-        guard let output = self.output else { return }
-        self.action = output.action ?? ""
-        self.selectedActionType = ActionType(rawValue: output.action!)!
-        self.value = output.value
+        self._showModal = showModal
     }
     
     var body: some View {
-        NavigationView {
-            List {
-                Section(header: Text("Value".uppercased())) {
-                    TextField("Value", value: $value, formatter: OutputDetail.formatter)
+        Group {
+            if self.showModal {
+                NavigationView {
+                    mainView
+                        .navigationBarTitle("Define Output", displayMode: .inline)
+                        .listStyle(GroupedListStyle())
+                        .navigationBarItems(
+                            leading: Button("Cancel") {
+                                self.showModal = false
+                            },
+                            trailing: Button("Save") {
+                                self.addOutput()
+                                self.showModal = false
+                            }
+                            .disabled(selectedControlId == nil)
+                    )
                 }
-                Section(header: Text("Output".uppercased())) {
-                    ForEach(self.allActionTypes, id: \.self) { aAction in
-                        OutputRow(name: aAction.name,
-                                  imageName: aAction.imageName,
-                                  isSelected: aAction == self.selectedActionType) {
-                                    self.selectedActionType = aAction
-                                    self.output?.action = aAction.rawValue
-                        }
-                    }
-                    .onDisappear() {
-                        self.output?.action = self.action
-                        self.save()
+                .navigationViewStyle(StackNavigationViewStyle())
+            } else {
+                mainView
+            }
+        }
+        .onAppear() {
+            self.load()
+        }
+    }
+}
+
+extension OutputDetail {
+    var mainView: some View {
+        Form {
+            Section(header: Text("Value".uppercased())) {
+                TextField("Value", value: $value, formatter: OutputDetail.formatter)
+            }
+            Section(header: Text("Output".uppercased())) {
+                Picker(
+                    selection: self.$selectedActionType,
+                    label: Text("Out")
+                ) {
+                    ForEach(ActionType.allCases, id: \.self) {
+                        ImageTextRow(text: $0.name, imageName: $0.imageName, isSelected: false, action: nil).tag($0)
                     }
                 }
-                Section(header: Text("Controls".uppercased())) {
-                    if bluetooth.scannedObjects.count > 0 {
-                        ForEach(bluetooth.scannedObjects, id: \.self) { controlId in
-                            VStack {
-                            if self.isControlAlreadyStored(id: controlId) {
+            }
+            
+            Section(header: Text("Controls".uppercased())) {
+                Picker(
+                    selection: self.$selectedControlId,
+                    label: Text("Select")
+                ) {
+                    ForEach(Array(controls).sorted(), id: \.id) {
+                        Text($0.id!).tag($0.id!)
+                    }
+                }
+            }
+            
+            if thereAreNewScannedControls {
+                Section(header: Text("Add Control".uppercased())) {
+                    ForEach(bluetooth.scannedObjects, id: \.self) { controlId in
+                        Group {
+                            if !self.isControlAlreadyStored(id: controlId) {
                                 HStack {
                                     Image(systemName: "questionmark")
                                     Text(controlId)
                                         .padding(8)
-                                }
-                                Button("Add Tag") {
-                                    self.addControl(id: controlId)
-                                }.padding(8)
+                                    Button(action: { self.addControl(id: controlId)}) {
+                                        Image(systemName: "plus")
+                                    }
                                 }
                             }
                         }
-                        
                     }
-                    ForEach(controls, id: \.self) { control in
-                        ControlRow(id: control.id!, isSelected: control == self.selectedControl ) {
-                            self.selectedControl = control
-                        }
-                    }.onDelete(perform: removeControls)
                 }
             }
-            .navigationBarItems(leading:
-                Button(action: { self.showModal = false }) {
-                    Text("Dismiss")
-                }
-            )
-            .navigationBarItems(trailing:
-                HStack {
-                    Button(action: {
-                        self.saveOutput()
-                        self.showModal = false
-                        
-                    }) {
-                        Text("Save")
+            if !self.showModal {
+                VStack(alignment: .center, spacing: 0) {
+                    Button(action: deleteOutput) {
+                        Text("Delete")
+                            .foregroundColor(.red)
                     }
                 }
-            )
-                .navigationBarItems(
-                    leading: Button("Cancel") {
-                        self.showModal = false
-                    },
-                    trailing: Button("Save") {
-                        self.saveOutput()
-                        self.showModal = false
-                    }
-                )
-                .navigationBarTitle("Define Output", displayMode: .inline)
-                .listStyle(GroupedListStyle())
+            }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
-
     }
-    
+}
+
+extension OutputDetail {
     func load()
     {
         guard let output = self.output else { return }
-        self.action = output.action ?? ""
-        self.selectedActionType = ActionType(rawValue: output.action!)!
+        self.selectedActionType = output.actionType
         self.value = output.value
     }
     
-    func saveOutput() {
+    func addOutput() {
         let output = Output(context: context)
+        let control = self.controls.first(where: { $0.id == self.selectedControlId })
+        
         output.value = self.value
         output.action = self.selectedActionType.rawValue
         output.prototype = self.prototype
+        output.control = control
         
         save()
+    }
+    
+    func deleteOutput() {
+        guard let output = self.output else { return }
+        context.delete(output)
+        save()
+        self.presentationMode.wrappedValue.dismiss()
     }
     
     func addControl(id: String) {
@@ -172,8 +187,20 @@ struct OutputDetail: View {
     
     func isControlAlreadyStored(id: String) -> Bool {
         return (self.controls.contains { (existingControl) -> Bool in
-            existingControl.id == id
-        }) == false
+            return existingControl.id == id
+        })
+    }
+    
+    var thereAreNewScannedControls: Bool {
+        get {
+            var newControls = false
+            for controlID in bluetooth.scannedObjects {
+                if isControlAlreadyStored(id: controlID) == false {
+                    newControls = true
+                }
+            }
+            return newControls
+        }
     }
 }
 
