@@ -92,20 +92,3 @@ struct PrototypeList_Previews: PreviewProvider {
         PrototypeList()
     }
 }
-
-struct OutputBluetoothSync {
-    var output: Output
-    
-    @Binding var angle: Float {
-        didSet {
-            output.value = Double(angle)
-        }
-    }
-    @Binding var toggled: Bool {
-        didSet {
-            if output.actionType.requiredControlType == .button {
-                output.value = (output.value > 0) ? 0 : 1
-            }
-        }
-    }
-}

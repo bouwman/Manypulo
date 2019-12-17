@@ -10,11 +10,16 @@ import SwiftUI
 import Combine
 import CoreBluetooth
 
-class BluetoothService: NSObject, ObservableObject {
+class BluetoothService: NSObject, ObservableObject, AngleTranslationProtocol {
+    let didChange = PassthroughSubject<BluetoothService, Never>()
     
-    @Published var angle: Float = 0
-    @Published var toggled: Bool = false
-    @Published var currentObject: String? = nil
+    var angleTransmissionJustStarted: Bool = false
+    var startAngle: Float = 0
+    
+    @Published public var angleDelta: Float = 0
+    @Published public var angle: Float = 0
+    @Published public var toggled: Bool = false
+    @Published public var currentObject: String? = nil
     @Published var scannedObjects: [String] = []
     @Published var errorMessage: String? = nil
     @Published var connected: Bool = false
@@ -92,6 +97,13 @@ extension BluetoothService: CBPeripheralDelegate {
                 return
             }
             self.angle = angle
+            
+            if angleTransmissionJustStarted {
+                startAngle = angle
+                angleTransmissionJustStarted = false
+            }
+            angleDelta = startAngle - angle
+            
             print("Bluetooth")
             print(angle)
             
@@ -112,6 +124,7 @@ extension BluetoothService: CBPeripheralDelegate {
             id.removeAll(where: { zerosWithBackslash.contains($0) })
             
             self.currentObject = id
+            self.angleTransmissionJustStarted = true
             
             if scannedObjects.contains(id) == false {
                 scannedObjects.append(id)

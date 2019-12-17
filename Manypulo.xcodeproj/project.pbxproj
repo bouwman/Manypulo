@@ -19,7 +19,6 @@
 		4754AABE239B92540009227D /* ManypuloTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AABD239B92540009227D /* ManypuloTests.swift */; };
 		4754AAC9239B92540009227D /* ManypuloUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AAC8239B92540009227D /* ManypuloUITests.swift */; };
 		4754AADB239B94630009227D /* BluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AAD6239B94630009227D /* BluetoothService.swift */; };
-		4754AADC239B94630009227D /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AAD7239B94630009227D /* Helper.swift */; };
 		4754AADD239B94630009227D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AAD8239B94630009227D /* Constants.swift */; };
 		4754AADE239B94630009227D /* ControlDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AAD9239B94630009227D /* ControlDatabase.swift */; };
 		4754AADF239B94630009227D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754AADA239B94630009227D /* Protocols.swift */; };
@@ -67,7 +66,6 @@
 		4754AAC8239B92540009227D /* ManypuloUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManypuloUITests.swift; sourceTree = "<group>"; };
 		4754AACA239B92540009227D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4754AAD6239B94630009227D /* BluetoothService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothService.swift; sourceTree = "<group>"; };
-		4754AAD7239B94630009227D /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		4754AAD8239B94630009227D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4754AAD9239B94630009227D /* ControlDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlDatabase.swift; sourceTree = "<group>"; };
 		4754AADA239B94630009227D /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 				4754AAD6239B94630009227D /* BluetoothService.swift */,
 				4754AAD9239B94630009227D /* ControlDatabase.swift */,
 				4754AAD8239B94630009227D /* Constants.swift */,
-				4754AAD7239B94630009227D /* Helper.swift */,
 				4754AADA239B94630009227D /* Protocols.swift */,
 			);
 			path = Model;
@@ -364,7 +361,6 @@
 				4754AAA6239B924F0009227D /* SceneDelegate.swift in Sources */,
 				4754AADD239B94630009227D /* Constants.swift in Sources */,
 				4754AADB239B94630009227D /* BluetoothService.swift in Sources */,
-				4754AADC239B94630009227D /* Helper.swift in Sources */,
 				47DAF101239C32BF003B2C66 /* ImageTextRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

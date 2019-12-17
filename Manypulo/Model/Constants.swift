@@ -35,3 +35,9 @@ struct Const {
         static let updateInterval: TimeInterval = 0.2
     }
 }
+
+extension String {
+    var digits: String {
+        return trimmingCharacters(in: CharacterSet(charactersIn: "01234567890.-").inverted)
+    }
+}

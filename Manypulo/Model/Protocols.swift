@@ -8,17 +8,6 @@
 
 import Foundation
 
-protocol TitlePresentable {
-    var title: String { get }
-}
-
-protocol ConnectingPresentable {
-    var isConnecting: Bool { get }
-}
-
-protocol BluetoothCellPresentable: TitlePresentable, ConnectingPresentable {
-}
-
 protocol AngleTranslationProtocol: class {
     var angleTransmissionJustStarted: Bool { get set }
     var startAngle: Float { get set }
