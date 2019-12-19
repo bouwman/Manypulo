@@ -43,7 +43,7 @@ struct PrototypeDetail: View {
                 ForEach(outputs, id: \.self) { output in
                     NavigationLink(destination:
                         OutputDetail(
-                            output: .constant(output),
+                            output: output,
                             showModal: self.$showOutput)) {
                                 
                                 ImageTextRow(
@@ -64,7 +64,7 @@ struct PrototypeDetail: View {
             }
         )
             .sheet(isPresented: self.$showOutput) {
-                OutputDetail(output: .constant(self.addOutput()),
+                OutputDetail(output: self.addOutput(),
                              showModal: self.$showOutput)
                     .environment(\.managedObjectContext, self.context)
                     .environmentObject(self.bluetooth)

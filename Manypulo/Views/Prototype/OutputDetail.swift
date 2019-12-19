@@ -22,12 +22,12 @@ struct OutputDetail: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var bluetooth: BluetoothService
-    @Binding var output: Output
+    @ObservedObject var output: Output
     @Binding var showModal: Bool
     
     
-    init(output: Binding<Output>, showModal: Binding<Bool>) {
-        self._output = output
+    init(output: Output, showModal: Binding<Bool>) {
+        self.output = output
         self._showModal = showModal
     }
     
@@ -53,7 +53,7 @@ struct OutputDetail: View {
                 mainView
             }
             onDisappear {
-                self.deleteThisOutputAndDismiss()
+                self.save()
             }
         }
     }
@@ -118,19 +118,6 @@ extension OutputDetail {
                         Text("Delete")
                             .foregroundColor(.red)
                     }
-                }
-            }
-        }
-    }
-    
-    var testView: some View {
-        Section(header: Text("Controls".uppercased())) {
-            Picker(
-                selection: self.$output.control,
-                label: Text("Select")
-            ) {
-                ForEach(Array(controls).sorted(), id: \.self) {
-                    Text($0.id!)
                 }
             }
         }
@@ -202,7 +189,7 @@ struct OutputDetail_Previews: PreviewProvider {
         output.value = 5
         output.action = ActionType.nextSong.rawValue
         
-        return OutputDetail(output: .constant(output), showModal: .constant(true))
+        return OutputDetail(output: output, showModal: .constant(true))
             .environment(\.managedObjectContext, context)
             .environmentObject(bluetooth)
     }
