@@ -7,14 +7,9 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct OutputDetail: View {
-    
-    static let formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
     
     @FetchRequest(
         entity: Control.entity(),
@@ -27,19 +22,12 @@ struct OutputDetail: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var bluetooth: BluetoothService
-    
-    var output: Output?
-    var prototype: Prototype?
-    
+    @Binding var output: Output
     @Binding var showModal: Bool
     
-    @State private var value: Double = 0.0
-    @State private var selectedControlId: String?
-    @State private var selectedActionType: ActionType = .playPause
     
-    init(output: Output? = nil, prototype: Prototype? = nil, showModal: Binding<Bool>) {
-        self.output = output
-        self.prototype = prototype
+    init(output: Binding<Output>, showModal: Binding<Bool>) {
+        self._output = output
         self._showModal = showModal
     }
     
@@ -52,50 +40,54 @@ struct OutputDetail: View {
                         .listStyle(GroupedListStyle())
                         .navigationBarItems(
                             leading: Button("Cancel") {
+                                self.deleteThisOutputAndDismiss()
                                 self.showModal = false
                             },
                             trailing: Button("Save") {
-                                self.addOutput()
                                 self.showModal = false
                             }
-                            .disabled(selectedControlId == nil)
                     )
                 }
                 .navigationViewStyle(StackNavigationViewStyle())
             } else {
                 mainView
             }
-        }
-        .onAppear() {
-            self.load()
+            onDisappear {
+                self.deleteThisOutputAndDismiss()
+            }
         }
     }
+    
+    static let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
 }
 
 extension OutputDetail {
     var mainView: some View {
         Form {
             Section(header: Text("Value".uppercased())) {
-                TextField("Value", value: $value, formatter: OutputDetail.formatter)
+                TextField("Value", value: self.$output.value, formatter: OutputDetail.formatter)
             }
             Section(header: Text("Output".uppercased())) {
                 Picker(
-                    selection: self.$selectedActionType,
+                    selection: self.$output.actionType,
                     label: Text("Out")
                 ) {
                     ForEach(ActionType.allCases, id: \.self) {
-                        ImageTextRow(text: $0.name, imageName: $0.imageName, isSelected: false, action: nil).tag($0)
+                        ImageTextRow(text: $0.name, imageName: $0.imageName, isSelected: false, action: nil)
                     }
                 }
             }
-            
             Section(header: Text("Controls".uppercased())) {
                 Picker(
-                    selection: self.$selectedControlId,
+                    selection: self.$output.control,
                     label: Text("Select")
                 ) {
                     ForEach(Array(controls).sorted(), id: \.id) {
-                        Text($0.id!).tag($0.id!)
+                        Text($0.id!)
                     }
                 }
             }
@@ -120,7 +112,9 @@ extension OutputDetail {
             }
             if !self.showModal {
                 VStack(alignment: .center, spacing: 0) {
-                    Button(action: deleteOutput) {
+                    Button(action: {
+                        self.deleteThisOutputAndDismiss()
+                    }) {
                         Text("Delete")
                             .foregroundColor(.red)
                     }
@@ -128,33 +122,26 @@ extension OutputDetail {
             }
         }
     }
+    
+    var testView: some View {
+        Section(header: Text("Controls".uppercased())) {
+            Picker(
+                selection: self.$output.control,
+                label: Text("Select")
+            ) {
+                ForEach(Array(controls).sorted(), id: \.self) {
+                    Text($0.id!)
+                }
+            }
+        }
+    }
 }
 
 extension OutputDetail {
-    func load()
-    {
-        guard let output = self.output else { return }
-        self.selectedActionType = output.actionType
-        self.value = output.value
-    }
     
-    func addOutput() {
-        let output = Output(context: context)
-        let control = self.controls.first(where: { $0.id == self.selectedControlId })
-        
-        output.value = self.value
-        output.action = self.selectedActionType.rawValue
-        output.prototype = self.prototype
-        output.control = control
-        
-        save()
-    }
-    
-    func deleteOutput() {
-        guard let output = self.output else { return }
+    func deleteThisOutputAndDismiss() {
         context.delete(output)
-        save()
-        self.presentationMode.wrappedValue.dismiss()
+        presentationMode.wrappedValue.dismiss()
     }
     
     func addControl(id: String) {
@@ -181,6 +168,7 @@ extension OutputDetail {
         do {
             try context.save()
         } catch {
+            print(error.localizedDescription)
             // handle the Core Data error
         }
     }
@@ -205,12 +193,17 @@ extension OutputDetail {
 }
 
 struct OutputDetail_Previews: PreviewProvider {
+    
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let bluetooth = BluetoothService()
+        
         let output = Output(context: context)
         output.value = 5
         output.action = ActionType.nextSong.rawValue
         
-        return OutputDetail(output: output, showModal: .constant(true))
+        return OutputDetail(output: .constant(output), showModal: .constant(true))
+            .environment(\.managedObjectContext, context)
+            .environmentObject(bluetooth)
     }
 }

@@ -41,11 +41,16 @@ struct PrototypeDetail: View {
             }
             Section(header: Text("Outputs".uppercased())) {
                 ForEach(outputs, id: \.self) { output in
-                    NavigationLink(destination: OutputDetail(output: output, prototype: self.prototype, showModal: self.$showOutput)) {
-                        ImageTextRow(text: output.actionType.name,
-                                  imageName: output.actionType.imageName,
-                                  isSelected: false,
-                                  action: nil)
+                    NavigationLink(destination:
+                        OutputDetail(
+                            output: .constant(output),
+                            showModal: self.$showOutput)) {
+                                
+                                ImageTextRow(
+                                    text: output.actionType.name,
+                                    imageName: output.actionType.imageName,
+                                    isSelected: false,
+                                    action: nil)
                     }
                 }
                 Button(action: { self.showOutput = true } ) {
@@ -59,7 +64,10 @@ struct PrototypeDetail: View {
             }
         )
             .sheet(isPresented: self.$showOutput) {
-                OutputDetail(prototype: self.prototype, showModal: self.$showOutput).environment(\.managedObjectContext, self.context).environmentObject(self.bluetooth)
+                OutputDetail(output: .constant(self.addOutput()),
+                             showModal: self.$showOutput)
+                    .environment(\.managedObjectContext, self.context)
+                    .environmentObject(self.bluetooth)
         }
         .onAppear() {
             self.name = self.prototype.name ?? ""
@@ -72,18 +80,12 @@ struct PrototypeDetail: View {
 
 extension PrototypeDetail {
     
-    //    func removeOutputs(at offsets: IndexSet) {
-    //        for index in offsets {
-    //            if let outputs = prototype.outputs {
-    //                let control = outputs[index]
-    //                context.delete(control)
-    //            }
-    //        }
-    //        save()
-    //    }
-    
-    func addOutput() {
+    func addOutput() -> Output {
+        let output = Output(context: context)
+        output.prototype = prototype
+        save()
         
+        return output
     }
     
     func save()

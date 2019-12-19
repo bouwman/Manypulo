@@ -11,7 +11,8 @@ import SwiftUI
 
 extension Output {
     var actionType: ActionType {
-        return ActionType(rawValue: self.action)!
+        get { ActionType(rawValue: action)! }
+        set { action = newValue.rawValue }
     }
 }
 

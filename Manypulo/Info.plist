@@ -26,6 +26,8 @@
 	<string>Needed for playing music.</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Needed to connect to Manypulo</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Needed to connect to Manypulo</string>
 	<key>NSHomeKitUsageDescription</key>
 	<string>Needed to control lights.</string>
 	<key>UIApplicationSceneManifest</key>
@@ -66,13 +68,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>
